@@ -1,6 +1,11 @@
 package edu.ucsb.cs156.spring.hello;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,6 +41,12 @@ public class TeamTest {
         assertEquals(false, other.equals(team));
         other.name = team.name;
         assertEquals(true,team.name.equals(other.name) && team.members.equals(other.members));
+        other.setMembers(new ArrayList<>(team.getMembers()));
+        assertEquals(true,team.name.equals(other.name) && team.members.equals(other.members));
+        other.name = team.name;
+        assert(team.equals(other));
+        other.addMember("bob");
+        assertEquals(false,team.equals(other));
     }
 
     @Test
